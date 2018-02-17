@@ -9,7 +9,7 @@ const buttonStyle = { width: '100%' }
 let AddDish = ({ dispatch }) => (
         <button style={buttonStyle}
                 className='button is-success is-outlined' 
-                onClick={ () => dispatch(addDish()) }>
+                onMouseDown={ () => dispatch(addDish()) }>
                 <span className="icon"></span>
                 Add Dish
         </button>

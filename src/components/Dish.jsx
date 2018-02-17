@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Tooltip } from 'react-tippy';
 
 const veggie = (
     <div className="field is-expanded has-addons">
@@ -13,11 +13,17 @@ const veggie = (
             </span>
         </div>
         <div className="control">
-            <a className="button is-small is-static">
-                <span className="icon">
-                    <i className="fa fa-leaf has-text-success" aria-hidden="true"></i>
-                </span>
-            </a>
+            <Tooltip title="Veggy"
+                position="top"
+                trigger="mouseenter"
+                delay="300"
+                style={{cursor: 'help'}}>
+                <a className="button is-small is-static">
+                    <span className="icon">
+                        <i className="fa fa-leaf has-text-success" aria-hidden="true"></i>
+                    </span>
+                </a>
+            </Tooltip>
         </div>
     </div>
 );
@@ -45,23 +51,22 @@ const hotness = (
     </div>
 );
 
-const Dish = ({ dish, onRemove, onChangeName, onChangePrice }) => (
-    <div className='box' style={{marginBottom: '1rem'}}>
-            <div className="has-text-centered">
-                <span className="icon" style={{cursor: 'move'}}>
-                    <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
-                </span>
-            </div>
-            <div className="field is-grouped">
-                <p className="control is-expanded">
-                    <input className='input' 
-                            value   ={dish.name}
+const nameInput = (dish, onChangeName) => (
+    <input className='input' 
+                            value={dish.name}
                             onChange={ ev => onChangeName(dish.id, ev.target.value) }
                             placeholder='Name' />
+)
+
+const Dish = ({ dish, onRemove, onChangeName, onChangePrice }) => (
+    <div className='box' style={{marginBottom: '1rem'}}>
+            <div className="field is-grouped">
+                <p className="control is-expanded">
+                    { nameInput(dish, onChangeName)}
                 </p>
                 <p className="control">
                     <button className="button is-danger"
-                            onClick={ () => onRemove(dish.id) }>
+                            onMouseDown={ () => onRemove(dish.id) }>
                             <span className="icon">
                                 <i className="fa fa-trash-o" aria-hidden="true"></i>
                             </span>
@@ -99,6 +104,10 @@ const Dish = ({ dish, onRemove, onChangeName, onChangePrice }) => (
             </div>
     </div>
 );
+
+Dish.componentDidMount = () => {
+    console.log('OK');
+}
 
 const dishPropType = PropTypes.shape({
     name: PropTypes.string,
