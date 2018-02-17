@@ -8,8 +8,8 @@ const buttonStyle = { marginRight: '5px' }
 
 let Buttons = ({ dispatch }) => (
     <div>
-        <button style={buttonStyle} className='button is-outlined is-dark is-small' onClick={ () => dispatch(increment()) }>+</button>
-        <button className='button is-outlined is-dark is-small' onClick={ () => dispatch(decrement()) }>-</button>
+        <button style={buttonStyle} className='button is-outlined is-dark is-small' onClick={ () => dispatch(increment()) }>plus</button>
+        <button className='button is-outlined is-dark is-small' onClick={ () => dispatch(decrement()) }>minus</button>
     </div>
 );
 
