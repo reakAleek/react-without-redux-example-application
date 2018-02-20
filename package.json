@@ -1,6 +1,7 @@
 {
   "version": "1.0.0",
-  "description": "",
+  "description": "Example react/redux application",
+  "homepage": "https://reakaleek.github.io/react-redux-example-application/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
