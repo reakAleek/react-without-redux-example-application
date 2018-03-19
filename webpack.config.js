@@ -1,18 +1,18 @@
 var path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+//const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const uglifyjs = new UglifyJsPlugin({
+/*const uglifyjs = new UglifyJsPlugin({
   sourceMap: true,
   uglifyOptions: {
     output: { comments: false }
   }
-});
+});*/
 
 const extractText = new ExtractTextPlugin('style.css');
 
 module.exports = {
-  plugins: [ uglifyjs, extractText ],
+  plugins: [ extractText ],
   entry: {
     app: [
       './src/index.js'
@@ -22,6 +22,7 @@ module.exports = {
     path: path.resolve(__dirname + '/dist'),
     filename: '[name].js',
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -35,7 +36,7 @@ module.exports = {
                     // If you are having trouble with urls not resolving add this setting.
                     // See https://github.com/webpack-contrib/css-loader#url
                     url: false,
-                    minimize: true,
+                    minimize: false,
                     sourceMap: true
                 }
             }, 
@@ -55,7 +56,8 @@ module.exports = {
         query: {
           presets: ['react', 'es2015'],
           plugins: [
-            ['transform-object-rest-spread', { useBuiltIns: true }]
+            ['transform-object-rest-spread', { useBuiltIns: true }],
+            ['transform-class-properties', { 'spec': true }]
           ]
         }
       },

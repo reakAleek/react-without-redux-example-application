@@ -1,0 +1,15 @@
+html, body, #app { height: 100%; };
+
+
+.dish-item__label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dish-item {
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px dashed lightgray;
+    }
+}
