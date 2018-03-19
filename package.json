@@ -1,13 +1,13 @@
 {
   "version": "1.0.0",
-  "description": "Example react/redux application",
-  "homepage": "https://reakaleek.github.io/react-redux-example-application/",
+  "description": "Example react application",
+  "homepage": "https://reakaleek.github.io/react-without-redux-example-application/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "dev": "webpack-dev-server"
   },
-  "author": "",
+  "author": "Jan Calanog",
   "license": "ISC",
   "dependencies": {
     "bulma": "^0.6.2",
