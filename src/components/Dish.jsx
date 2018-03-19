@@ -11,7 +11,11 @@ class Dish extends React.Component {
             price: this.props.dish.price,
             addInfo: this.props.dish.addInfo,
         }
-    }    
+    }
+
+    componentWillReceiveProps(ev) {
+        this.setState({ ...ev.dish })
+    }
 
     onChangeName = (name) => {
         this.setState({ ...this.state, name}, this.updateParentState)

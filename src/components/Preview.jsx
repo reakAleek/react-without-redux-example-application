@@ -19,7 +19,7 @@ class Preview extends React.Component {
                 <li className="dish-item" key={index}>
                     <div className="dish-item__label is-size-5">
                         <span>{ dish.name }</span>
-                        <span>{ !dish.price || '€' } { dish.price.toLocaleString('de-DE') }</span>
+                        <span>{ !dish.price || '€' } { dish.price.replace('.', ',') }</span>
                     </div>
                     <div className="dish-item__additional-info has-text-grey-light">
                         { dish.addInfo }
@@ -45,7 +45,7 @@ class Preview extends React.Component {
                 </header>
                 <div className="card-content" style={{minHeight: '5rem'}}>
                     <div>
-                        { (this.state.dishes.length > 0 && this.state.dishes[0].name != '') ? '' : 'No content' }
+                        { (this.state.dishes.length > 0) ? '' : 'No content' }
                     </div>
                     <ul className="dish-list">
                         {

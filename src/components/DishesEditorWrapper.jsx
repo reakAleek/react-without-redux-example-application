@@ -7,7 +7,7 @@ export default class DishesEditorWrapper extends React.Component {
     constructor() {
         super();
         this.state = {
-            dishes: [{ id: 0, name: 'Wiener Schnitzel', price: 8.50, addInfo: 'Mit Pommes oder Kartoffelsalat.'}]
+            dishes: []
         }
     }
 
