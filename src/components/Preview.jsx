@@ -13,16 +13,24 @@ class Preview extends React.Component {
         this.setState({ dishes: ev.dishes })
     }
 
+    renderPrice = (price) => {
+        return Number(price).toFixed(2).replace('.', ',');
+    }
+
     dishItem = (dish, index) => {
         return (dish.name) ? 
             (
                 <li className="dish-item" key={index}>
                     <div className="dish-item__label is-size-5">
                         <span>{ dish.name }</span>
-                        <span>{ !dish.price || '€' } { dish.price.replace('.', ',') }</span>
+                        <span><nobr>{ !dish.price || '€' } { this.renderPrice(dish.price) }</nobr></span>
                     </div>
                     <div className="dish-item__additional-info has-text-grey-light">
                         { dish.addInfo }
+                    </div>
+                    <div>
+                        { (dish.veggie) ? (<span className="icon"><i className="fa fa-leaf has-text-success" aria-hidden="true"/></span>) : null }
+                        { Array.apply(null, Array(dish.hot)).map( (_, index) => <span key={index} className="icon"><i className="fa fa-fire has-text-danger" aria-hidden="true"/></span>) }
                     </div>
                 </li>
             )

@@ -18,7 +18,9 @@ class DishesEditor extends React.Component {
                         id: 0,
                         name: 'Wiener Schnitzel',
                         price: '8.50',
-                        addInfo: 'Mit Pommes oder Kartoffelsalat.'
+                        addInfo: 'Mit Pommes oder Kartoffelsalat.',
+                        veggie: false,
+                        hot: 0
                     }
                 },
                 allIds: [0],
@@ -35,7 +37,12 @@ class DishesEditor extends React.Component {
                 byId: {
                     ...this.state.present.byId,
                     [this.state.nextId]: {
-                        id: this.state.nextId, name: '', price: '', addInfo: ''
+                        id: this.state.nextId,
+                        name: '', 
+                        price: '',
+                        addInfo: '',
+                        veggie: false,
+                        hot: 0
                     }
                 },
                 allIds: [...this.state.present.allIds, this.state.nextId],

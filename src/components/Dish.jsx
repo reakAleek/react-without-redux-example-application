@@ -10,6 +10,8 @@ class Dish extends React.Component {
             name: this.props.dish.name,
             price: this.props.dish.price,
             addInfo: this.props.dish.addInfo,
+            veggie: this.props.dish.veggie,
+            hot: this.props.dish.hot
         }
     }
 
@@ -27,6 +29,14 @@ class Dish extends React.Component {
 
     onChangeAddInfo = (text) => {
         this.setState({ ...this.state, addInfo: text }, this.updateParentState);
+    }
+
+    onChangeVeggie = (isVeggie) => {
+        this.setState({ ...this.state, veggie: (isVeggie === 'true')}, this.updateParentState);
+    }
+
+    onChangeHot = (hot) => {
+        this.setState({ ...this.state, hot: Number(hot)}, this.updateParentState);
     }
 
     updateParentState() {
@@ -93,9 +103,9 @@ class Dish extends React.Component {
         <div className="field is-expanded has-addons">
             <div className="control">
                 <span className="select is-small">
-                    <select>
-                        <option>No</option>
-                        <option>Yes</option>
+                    <select value={this.state.veggie} onChange={ ev => this.onChangeVeggie(ev.target.value) }>
+                        <option value={false}>No</option>
+                        <option value={true}>Yes</option>
                     </select>
                 </span>
             </div>
@@ -119,11 +129,11 @@ class Dish extends React.Component {
         <div className="field is-expanded has-addons">
             <div className="control">
                 <span className="select is-small">
-                    <select>
-                        <option>No</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                    <select value={this.state.hot} onChange={ ev => this.onChangeHot(ev.target.value)}>
+                        <option value={0}>No</option>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
                     </select>
                 </span>
             </div>
@@ -162,7 +172,13 @@ class Dish extends React.Component {
 }
 
 Dish.propTypes = {
-    dish: PropTypes.object,
+    dish: PropTypes.shape({
+        name: PropTypes.string,
+        price: PropTypes.string,
+        addInfo: PropTypes.string,
+        veggie: PropTypes.bool,
+        hot: PropTypes.number
+    }),
     onRemove: PropTypes.func,
     onUpdate: PropTypes.func
 }
