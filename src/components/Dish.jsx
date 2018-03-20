@@ -4,21 +4,6 @@ import { Tooltip } from 'react-tippy';
 
 class Dish extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: this.props.dish.name,
-            price: this.props.dish.price,
-            addInfo: this.props.dish.addInfo,
-            veggie: this.props.dish.veggie,
-            hot: this.props.dish.hot
-        }
-    }
-
-    componentWillReceiveProps(ev) {
-        this.setState({ ...ev.dish })
-    }
-
     onChangeName = (name) => {
         this.setState({ ...this.state, name}, this.updateParentState)
     }
@@ -47,7 +32,7 @@ class Dish extends React.Component {
         <div className="field is-grouped">
                 <p className="control is-expanded">
                 <input className='input'
-                        value={this.state.name}
+                        value={this.props.dish.name}
                         onChange={ ev => this.onChangeName(ev.target.value) }
                         placeholder='Name' />
                 </p>
@@ -69,7 +54,7 @@ class Dish extends React.Component {
                             type='number'
                             step='0.01'
                             min='0'
-                            value={this.state.price}
+                            value={this.props.dish.price}
                             onChange={ ev => this.onChangePrice(ev.target.value) }
                             placeholder='Price' />
                 </p>
@@ -90,7 +75,7 @@ class Dish extends React.Component {
                         rows="1" 
                         className="textarea" 
                         placeholder="Additional infos..."
-                        value={this.state.addInfo}
+                        value={this.props.dish.addInfo}
                         onChange={ ev => this.onChangeAddInfo(ev.target.value)}
                         onFocus={ ev => ev.target.style.height = '10rem' }
                         onBlur={ ev => {ev.target.style.height = '3rem'; ev.target.scrollTop = 0; } }
@@ -103,7 +88,7 @@ class Dish extends React.Component {
         <div className="field is-expanded has-addons">
             <div className="control">
                 <span className="select is-small">
-                    <select value={this.state.veggie} onChange={ ev => this.onChangeVeggie(ev.target.value) }>
+                    <select value={this.props.dish.veggie} onChange={ ev => this.onChangeVeggie(ev.target.value) }>
                         <option value={false}>No</option>
                         <option value={true}>Yes</option>
                     </select>
@@ -129,7 +114,7 @@ class Dish extends React.Component {
         <div className="field is-expanded has-addons">
             <div className="control">
                 <span className="select is-small">
-                    <select value={this.state.hot} onChange={ ev => this.onChangeHot(ev.target.value)}>
+                    <select value={this.props.dish.hot} onChange={ ev => this.onChangeHot(ev.target.value)}>
                         <option value={0}>No</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>

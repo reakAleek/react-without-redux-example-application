@@ -1,11 +1,9 @@
 import React from 'react';
-import Dish from './Dish.jsx';
 import PropTypes from 'prop-types';
 const _ = require('lodash');
-
-//import LimitedSizeStack from '../commons/LimitedSizeStack';
-
-//const undoStack = new LimitedSizeStack(50);
+import DishList from './DishList.jsx';
+import UndoRedoDishesButtons from './UndoRedoDishesButtons.jsx';
+import AddDishButton from './AddDishButton.jsx';
 
 class DishesEditor extends React.Component {
     constructor(props) {
@@ -107,41 +105,24 @@ class DishesEditor extends React.Component {
         }, this.updateParentState);
     }
 
-    renderUndoRedoButton = (condition, onClick, text, icon) =>  (
-        <button
-            disabled={!condition}
-            className='button' 
-            onClick={onClick}>
-            <span className={ 'icon' }>
-            { icon } 
-            </span>
-            <span>{ text }</span>
-        </button>
-    );
+    getDishList = () => {
+        return this.state.present.allIds.map(id => this.state.present.byId[id])
+    }
 
     render = () => (    
         <div>
-            <div className="buttons">
-                { this.renderUndoRedoButton(this.state.past.length, this.onUndo, 'Undo', <i className="fa fa-undo" aria-hidden="true"/>)}
-                { this.renderUndoRedoButton(this.state.future.length, this.onRedo, 'Redo', <i className="fa fa-repeat" aria-hidden="true"/>)}
-            </div>
-            <ul>
-                {
-                    this.state.present.allIds.map(id => this.state.present.byId[id]).map((dish) => (
-                        <li key={dish.id}>
-                            <Dish dish={dish}
-                                onRemove={ this.deleteDish(dish.id) }
-                                onUpdate={ this.updateDish(dish.id) } />
-                        </li>
-                    ))
-                }
-            </ul>
-            <button style={{ width: '100%' }}
-                    className='button is-success' 
-                    onMouseDown={ () => this.addDish() }>
-                    <span className="icon"></span>
-                    Add Dish
-            </button>
+
+            <UndoRedoDishesButtons 
+                undoActive={this.state.past.length > 0}
+                undoFunc={this.onUndo}
+                redoActive={this.state.future.length > 0}
+                redoFunc={this.onRedo} />
+
+            <DishList dishes={ this.getDishList() }
+                removeDishFunc={this.deleteDish}
+                updateDishFunc={this.updateDish} />
+
+            <AddDishButton addDishFunc={this.addDish}/>
         </div>
     );
 }
