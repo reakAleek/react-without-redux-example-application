@@ -4,12 +4,12 @@ import { Tooltip } from 'react-tippy';
 
 class Dish extends React.Component {
 
-    onChangeName = (name) => this.updateParentState({ name });
-    onChangePrice = (price) => this.updateParentState({ price });
-    onChangeAddInfo = (text) => this.updateParentState({ addInfo: text });
-    onChangeVeggie = (isVeggie) => this.updateParentState({ veggie: (isVeggie === 'true') });
-    onChangeHot = (hot) => this.updateParentState({ hot: Number(hot) });
-    updateParentState = (obj) => this.props.onUpdate(obj);
+    onChangeName = (name) => this.updateDish({ name });
+    onChangePrice = (price) => this.updateDish({ price });
+    onChangeAddInfo = (text) => this.updateDish({ addInfo: text });
+    onChangeVeggie = (isVeggie) => this.updateDish({ veggie: (isVeggie === 'true') });
+    onChangeHot = (hot) => this.updateDish({ hot: Number(hot) });
+    updateDish = (obj) => this.props.onUpdate(obj);
 
     renderNameInput = () => (
         <div className="field is-grouped">
