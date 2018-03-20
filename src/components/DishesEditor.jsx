@@ -29,13 +29,13 @@ class DishesEditor extends React.Component {
     }
 
     addDish = () => {
-        this.setState({
-            past: [this.state.present, ...this.state.past],
+        this.setState((prevState) => ({
+            past: [prevState.present, ...prevState.past],
             present: {
                 byId: {
-                    ...this.state.present.byId,
-                    [this.state.nextId]: {
-                        id: this.state.nextId,
+                    ...prevState.present.byId,
+                    [prevState.nextId]: {
+                        id: prevState.nextId,
                         name: '', 
                         price: '',
                         addInfo: '',
@@ -43,36 +43,36 @@ class DishesEditor extends React.Component {
                         hot: 0
                     }
                 },
-                allIds: [...this.state.present.allIds, this.state.nextId],
+                allIds: [...prevState.present.allIds, prevState.nextId],
             },
             future: [],
-            nextId: this.state.nextId + 1
-        }, this.updateParentState);
+            nextId: prevState.nextId + 1
+        }), this.updateParentState);
     }
 
     deleteDish = (id) => () => {
-        this.setState({
-            past: [this.state.present, ...this.state.past],
+        this.setState((prevState) => ({
+            past: [prevState.present, ...prevState.past],
             present: {
-                byId: _.omit(this.state.present.byId, id),
-                allIds: _.without(this.state.present.allIds, id)
+                byId: _.omit(prevState.present.byId, id),
+                allIds: _.without(prevState.present.allIds, id)
             },
             future: []
-        }, this.updateParentState);
+        }), this.updateParentState);
     }
 
     updateDish = (id) => (newDish) => {
-        this.setState({
-            past: [this.state.present, ...this.state.past],
+        this.setState((prevState) => ({
+            past: [prevState.present, ...prevState.past],
             present: {
-                ...this.state.present,
+                ...prevState.present,
                 byId: {
-                    ...this.state.present.byId,
-                    [id]: Object.assign({}, this.state.present.byId[id], newDish)
+                    ...prevState.present.byId,
+                    [id]: Object.assign({}, prevState.present.byId[id], newDish)
                 }   
             },
             future: []
-        }, this.updateParentState);
+        }), this.updateParentState);
     }
 
     componentDidMount() {
@@ -87,22 +87,22 @@ class DishesEditor extends React.Component {
         if (this.state.past.length <= 0) {
             return;
         }
-        this.setState({
-            past: this.state.past.slice(1, this.state.past.length),
-            present: this.state.past[0] || this.state.present,
-            future: [this.state.present, ...this.state.future]
-        }, this.updateParentState);
+        this.setState((prevState) =>({
+            past: prevState.past.slice(1, prevState.past.length),
+            present: prevState.past[0] || prevState.present,
+            future: [prevState.present, ...prevState.future]
+        }), this.updateParentState);
     }
 
     onRedo = () => {
         if (this.state.future.length <= 0) {
             return;
         }
-        this.setState({
-            past: [this.state.present, ...this.state.past],
-            present: this.state.future[0] || this.state.present,
-            future: this.state.future.slice(1, this.state.future.length)
-        }, this.updateParentState);
+        this.setState((prevState) => ({
+            past: [prevState.present, ...prevState.past],
+            present: prevState.future[0] || prevState.present,
+            future: prevState.future.slice(1, prevState.future.length)
+        }), this.updateParentState);
     }
 
     getDishList = () => {

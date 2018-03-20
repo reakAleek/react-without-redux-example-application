@@ -2,17 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 class Preview extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { 
-            dishes: this.props.dishes || []
-        }
-    }
-
-    componentWillReceiveProps = (ev) => { 
-        this.setState({ dishes: ev.dishes })
-    }
-
     renderPrice = (price) => {
         return Number(price).toFixed(2).replace('.', ',');
     }
@@ -53,11 +42,11 @@ class Preview extends React.Component {
                 </header>
                 <div className="card-content" style={{minHeight: '5rem'}}>
                     <div>
-                        { (this.state.dishes.length > 0) ? '' : 'No content' }
+                        { (this.props.dishes.length > 0) ? '' : 'No content' }
                     </div>
                     <ul className="dish-list">
                         {
-                            this.state.dishes.map(this.dishItem)
+                            this.props.dishes.map(this.dishItem)
                         }
                     </ul>
                 </div>

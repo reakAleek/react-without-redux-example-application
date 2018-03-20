@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 
 class UndoRedoDishesButtons extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     renderUndoRedoButton = (condition, onClick, text, icon) =>  (
         <button
             disabled={!condition}
