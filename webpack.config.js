@@ -1,18 +1,18 @@
 var path = require('path');
-//const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-/*const uglifyjs = new UglifyJsPlugin({
-  sourceMap: true,
+const uglifyjs = new UglifyJsPlugin({
+  sourceMap: false,
   uglifyOptions: {
     output: { comments: false }
   }
-});*/
+});
 
 const extractText = new ExtractTextPlugin('style.css');
 
 module.exports = {
-  plugins: [ extractText ],
+  plugins: [ extractText, uglifyjs ],
   entry: {
     app: [
       './src/index.js'
@@ -22,7 +22,7 @@ module.exports = {
     path: path.resolve(__dirname + '/dist'),
     filename: '[name].js',
   },
-  devtool: 'source-map',
+  //devtool: 'source-map',
   module: {
     rules: [
       {
@@ -37,13 +37,13 @@ module.exports = {
                     // See https://github.com/webpack-contrib/css-loader#url
                     url: false,
                     minimize: false,
-                    sourceMap: true
+                    sourceMap: false
                 }
             }, 
             {
                 loader: 'sass-loader',
                 options: {
-                    sourceMap: true
+                    sourceMap: false
                 }
             }
           ]

@@ -128,7 +128,6 @@ class DishesEditor extends React.Component {
 }
 
 DishesEditor.propTypes = {
-    dishes: PropTypes.array,
     onUpdate: PropTypes.func
 }
 
