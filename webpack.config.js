@@ -1,6 +1,7 @@
 var path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 
 const uglifyjs = new UglifyJsPlugin({
   sourceMap: false,
@@ -11,8 +12,14 @@ const uglifyjs = new UglifyJsPlugin({
 
 const extractText = new ExtractTextPlugin('style.css');
 
+const definePlugin = new webpack.DefinePlugin({
+  'process.env':{
+    'NODE_ENV': JSON.stringify('production'),
+  }
+});
+
 module.exports = {
-  plugins: [ extractText, uglifyjs ],
+  plugins: [ extractText, uglifyjs, definePlugin ],
   entry: {
     app: [
       './src/index.js'
